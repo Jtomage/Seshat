@@ -1,0 +1,30 @@
+{
+    "name": "seshat",
+    "folders": [
+        {
+            "path": "src/frontend"
+        },
+        {
+            "path": "src/frontend/seshat-components"
+        },
+        {
+            "path": "src/frontend/seshat-storybook"
+        }
+    ],
+    "settings": {
+        // enable suto-fixing on save for ESLint.
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "explicit"
+        },
+        // Set Prettier as the default formatter for all languages that have a Prettier extension.
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        // Enable formatting on save.
+        "editor.formatOnSave": true,
+        // Define ESLint working directories for a monorepo setup.
+        // This tells the ESLint extension to check for a relevant configuration
+        // file and node_modules in each sub-package.
+        "eslint.workingDirectories": [{
+            "mode": "auto"
+        }]        
+    }
+}
