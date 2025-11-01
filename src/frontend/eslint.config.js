@@ -6,9 +6,11 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
 import { defineConfig, globalIgnores } from "eslint/config";
+import perfectionist from "eslint-plugin-perfectionist";
 
 export default defineConfig({
   ignores: ["**/dist/", "**/node_modules/", "**/converage/", "**/*.d.ts"],
+  extends: [perfectionist],
   languageOptions: {
     globals: globals.browser,
     parser: parser,
@@ -34,6 +36,14 @@ export default defineConfig({
         ignoreCase: false,
         ignoreDeclarationSort: false,
         ignore,
+      },
+    ],
+    "perfectionist/sort-jsx-props": [
+      "error",
+      {
+        order: "asc", // or 'asc' for alphabetical
+        "case-insensitive": true,
+        type: "alphabetical",
       },
     ],
   },

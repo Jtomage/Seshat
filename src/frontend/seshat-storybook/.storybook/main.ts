@@ -9,12 +9,13 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
+  docs: {
+    docsMode: true,
+  },
   typescript: {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) =>
-        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
   async viteFinal(config) {

@@ -14,7 +14,7 @@ const preview: Preview = {
     theme: {
       name: "Theme",
       description: "Global Theme",
-      defaultValue: "light",
+      defaultValue: webLightTheme,
       toolbar: {
         icon: "paintbrush",
         items: [
@@ -41,6 +41,7 @@ const preview: Preview = {
       disable: true,
     },
   },
+  tags: ["autodocs"],
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme;
