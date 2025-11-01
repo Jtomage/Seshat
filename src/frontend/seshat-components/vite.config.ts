@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import { resolve } from "path";
 import { cjsInterop } from "vite-plugin-cjs-interop";
+import * as packageJson from "./package.json";
+// import griffel from "@griffel/vite-plugin";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,9 +14,15 @@ export default defineConfig({
       dependencies: ["@fluentui/react-components"],
     }),
     dts({
+      entryRoot: "src",
       insertTypesEntry: true,
-      tsconfigPath: "./tsconfig.app.json"
+      tsconfigPath: "./tsconfig.app.json",
     }),
+    // griffel({
+    //   babelOptions: {
+    //     presets: ["@babel/preset-typescript", "@babel/preset-react"],
+    //   },
+    // }),
   ],
   ssr: {
     noExternal: ["@fluentui/react-icons"],
@@ -27,7 +35,7 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: [...Object.keys(packageJson.peerDependencies)],
       output: {
         globals: {
           react: "React",
