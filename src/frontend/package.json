@@ -1,12 +1,13 @@
 {
   "name": "seshat-frontend",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "build": "npm run build --workspaces",
     "storybook": "npm run storybook --workspace=seshat-storybook",
     "clean": "npm run clean --workspaces",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "npm run lint:fix --workspaces"
   },
   "workspaces": [
     "seshat-components",

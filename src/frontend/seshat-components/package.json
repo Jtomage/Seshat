@@ -19,6 +19,7 @@
   "scripts": {
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "watch": "vite build --watch"

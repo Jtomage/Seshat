@@ -42,7 +42,7 @@ export const Default: Story = {
     appearance: "underline",
     placeholder: "",
     onChange: (e) => {
-      e;
+      console.log(e);
     },
   },
 };

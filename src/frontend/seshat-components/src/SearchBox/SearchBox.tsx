@@ -9,17 +9,25 @@ import type { FC } from "react";
 export type SearchBoxProps = FluentSearchBoxProps &
   FluentFieldProps & {
     fieldName: string;
+    fieldClassName: string;
   };
 
 export const SearchBox: FC<SearchBoxProps> = ({
   fieldName,
+  fieldClassName,
   orientation,
   hint,
   size,
   ...rest
 }: SearchBoxProps) => {
   return (
-    <Field label={fieldName} size={size} orientation={orientation} hint={hint}>
+    <Field
+      className={fieldClassName}
+      label={fieldName}
+      size={size}
+      orientation={orientation}
+      hint={hint}
+    >
       <FluentSearchBox size={size} {...rest} />
     </Field>
   );

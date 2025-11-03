@@ -9,9 +9,6 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
-  docs: {
-    docsMode: true,
-  },
   typescript: {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
