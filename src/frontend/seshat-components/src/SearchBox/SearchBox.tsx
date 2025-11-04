@@ -1,32 +1,33 @@
-import {
-  Field,
-  SearchBox as FluentSearchBox,
-  type SearchBoxProps as FluentSearchBoxProps,
-  type FieldProps as FluentFieldProps,
-} from "@fluentui/react-components";
 import type { FC } from "react";
 
-export type SearchBoxProps = FluentSearchBoxProps &
-  FluentFieldProps & {
+import {
+  Field,
+  type FieldProps as FluentFieldProps,
+  SearchBox as FluentSearchBox,
+  type SearchBoxProps as FluentSearchBoxProps,
+} from "@fluentui/react-components";
+
+export type SearchBoxProps = FluentFieldProps &
+  FluentSearchBoxProps & {
+    fieldClassName?: string;
     fieldName: string;
-    fieldClassName: string;
   };
 
 export const SearchBox: FC<SearchBoxProps> = ({
-  fieldName,
   fieldClassName,
-  orientation,
+  fieldName,
   hint,
+  orientation,
   size,
   ...rest
 }: SearchBoxProps) => {
   return (
     <Field
       className={fieldClassName}
-      label={fieldName}
-      size={size}
-      orientation={orientation}
       hint={hint}
+      label={fieldName}
+      orientation={orientation}
+      size={size}
     >
       <FluentSearchBox size={size} {...rest} />
     </Field>

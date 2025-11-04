@@ -5,18 +5,18 @@ import {
   type TreeItemOpenChangeEvent,
   type TreeItemValue,
 } from "@fluentui/react-components";
-import { useState, type FC } from "react";
+import { type FC, useState } from "react";
 
 export interface FlieExplorerSubTreeProps {
-  value: TreeItemValue;
-  onDataLoading?: () => void;
   onDataLoaded?: () => void;
+  onDataLoading?: () => void;
+  value: TreeItemValue;
 }
 
 export const FlieExplorerSubTree: FC<FlieExplorerSubTreeProps> = ({
-  value,
-  onDataLoading,
   onDataLoaded,
+  onDataLoading,
+  value,
 }: FlieExplorerSubTreeProps) => {
   const [open, setOpen] = useState(false);
 
@@ -30,13 +30,13 @@ export const FlieExplorerSubTree: FC<FlieExplorerSubTreeProps> = ({
   return (
     <>
       <FlatTreeItem
-        itemType="branch"
-        value={value}
         aria-level={1}
-        aria-setsize={3}
         aria-posinset={1}
-        open={open}
+        aria-setsize={3}
+        itemType="branch"
         onOpenChange={openChangeHandler}
+        open={open}
+        value={value}
       >
         <TreeItemLayout>{value.toString()}</TreeItemLayout>
       </FlatTreeItem>

@@ -1,13 +1,32 @@
-import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
-import dts from "vite-plugin-dts";
 import { resolve } from "path";
 import { cjsInterop } from "vite-plugin-cjs-interop";
+import dts from "vite-plugin-dts";
+import { defineConfig } from "vitest/config";
+
 import * as packageJson from "./package.json";
 // import griffel from "@griffel/vite-plugin";
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    emptyOutDir: true,
+    lib: {
+      entry: resolve(__dirname, "./src/index.ts"),
+      fileName: (format) => `index.${format}.js`,
+      formats: ["es", "cjs"],
+      name: "@seshat/components",
+    },
+    rollupOptions: {
+      external: [...Object.keys(packageJson.peerDependencies)],
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     cjsInterop({
@@ -27,27 +46,9 @@ export default defineConfig({
   ssr: {
     noExternal: ["@fluentui/react-icons"],
   },
-  build: {
-    lib: {
-      entry: resolve(__dirname, "./src/index.ts"),
-      name: "@seshat/components",
-      formats: ["es", "cjs"],
-      fileName: (format) => `index.${format}.js`,
-    },
-    rollupOptions: {
-      external: [...Object.keys(packageJson.peerDependencies)],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-        },
-      },
-    },
-    emptyOutDir: true,
-  },
   test: {
     environment: "jsdom",
-    setupFiles: ["vitest-setup.ts"],
     globals: true,
+    setupFiles: ["vitest-setup.ts"],
   },
 });
