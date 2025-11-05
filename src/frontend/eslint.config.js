@@ -4,7 +4,7 @@ import pluginReact from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
-import prettierRecommended from "eslint-plugin-prettier/recommended";
+import prettierFlat from "eslint-plugin-prettier/flat";
 import perfectionist from "eslint-plugin-perfectionist";
 import { defineConfig, globalIgnores } from "eslint/config";
 
@@ -21,7 +21,7 @@ export default defineConfig([
   ...tseslint.configs.stylistic,
   reactRefresh.configs.vite,
   perfectionist.configs["recommended-natural"],
-  prettierRecommended,
+  prettierFlat,
   {
     ignores: ["**/dist/", "**/node_modules/", "**/converage/", "**/*.d.ts"],
     files: ["**/*.{ts, tsx}"],

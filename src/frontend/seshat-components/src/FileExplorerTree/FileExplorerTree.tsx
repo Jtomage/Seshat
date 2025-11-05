@@ -3,17 +3,50 @@ import {
   FlatTreeItem,
   TreeItemLayout,
   type TreeItemOpenChangeData,
-  type TreeItemValue,
 } from "@fluentui/react-components";
-// import { FlieExplorerSubTree } from "./FileExplorerSubTree";
 import { type FC, useState } from "react";
+import { type FileTreeItem } from "./FileExplorerTree.types";
+import { FlieExplorerTreeItem } from "./FileExplorerTreeItem";
 
 export const FileExplorerTree: FC = () => {
+  const fileItems: FileTreeItem[] = [
+    {
+      fullPath: "home",
+      isDirectory: true,
+      itemName: "home",
+      level: 0,
+    },
+    {
+      fullPath: "usr",
+      isDirectory: true,
+      itemName: "usr",
+      level: 0,
+    },
+    {
+      fullPath: "bin",
+      isDirectory: true,
+      itemName: "bin",
+      level: 0,
+    },
+  ];
+
   const [openItems, setOpenItems] = useState<boolean>(false);
 
   const handlerOpenItem = (_: unknown, data: TreeItemOpenChangeData) => {
     setOpenItems(data.open);
   };
+
+  return (
+    <FlatTree>
+      {fileItems.map((v, i) => (
+        <FlieExplorerTreeItem
+          {...v}
+          numSibilings={fileItems.length}
+          position={i}
+        />
+      ))}
+    </FlatTree>
+  );
 
   return (
     <FlatTree>
