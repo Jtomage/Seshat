@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { cjsInterop } from "vite-plugin-cjs-interop";
@@ -49,6 +50,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
-    setupFiles: ["vitest-setup.ts"],
+    include: ["./src/**/*.test.{ts,tsx}"],
+    setupFiles: ".test/vitest-setup.ts",
   },
 });

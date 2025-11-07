@@ -1,23 +1,17 @@
-import { createContext, type ReactNode } from "react";
-import type { AFileExplorerSerice } from "./AFileExplorerService";
+import { type ReactNode } from "react";
 
-export const FileExplorerContext = createContext<AFileExplorerSerice>({
-  getDirectories: function (path: string): string[] {
-    throw new Error("Function not implemented.");
-  },
-  getFiles: function (path: string, searchPattern: string): string[] {
-    throw new Error("Function not implemented.");
-  },
-});
+import type { AFileExplorerSerice } from "../Services";
 
-interface FileExplorerProviderProps {
-  fileExplorerService: AFileExplorerSerice;
+import { FileExplorerContext } from "./FileExplorerContext";
+
+export interface FileExplorerProviderProps {
   children: ReactNode;
+  fileExplorerService: AFileExplorerSerice;
 }
 
 export const FileExplorerProvider = ({
-  fileExplorerService,
   children,
+  fileExplorerService,
 }: FileExplorerProviderProps) => {
   return (
     <FileExplorerContext.Provider value={fileExplorerService}>

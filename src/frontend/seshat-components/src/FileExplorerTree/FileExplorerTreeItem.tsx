@@ -26,6 +26,7 @@ export const FlieExplorerTreeItem: FC<FileExplorerTreeItemProps> = ({
 
   const parentValue = () => {
     const i = fullPath.lastIndexOf(itemName);
+    console.log("parentValue", i);
     return fullPath.slice(0, i - 1);
   };
 
