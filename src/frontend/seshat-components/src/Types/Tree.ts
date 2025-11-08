@@ -28,6 +28,10 @@ export class TreeNode<T> {
     this.children.push(node);
   }
 
+  clearChildren() {
+    this.children = [];
+  }
+
   find(predicate: (node: TreeNode<T>) => boolean): null | TreeNode<T> {
     const result = this.children.find(predicate);
 

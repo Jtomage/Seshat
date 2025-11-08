@@ -17,6 +17,7 @@ export class DirectoryTree extends Tree<DirectoryInfo> {
    * @returns DirectoryTreeNode if found otherwise returns null
    */
   walk(path: string): null | TreeNode<DirectoryInfo> {
+    // split the paths and remove empty string
     const pathSplit = path.split("/").filter((item) => item.trim() !== "");
 
     // walk the path using recursion
@@ -30,7 +31,7 @@ export class DirectoryTree extends Tree<DirectoryInfo> {
       if (!currName) return node;
 
       // search children to see if matches curr
-      const result = node.children.find(({ value }) => value.name === currName);
+      const result = node.find(({ value }) => value.name === currName);
 
       if (!result) return null;
 
