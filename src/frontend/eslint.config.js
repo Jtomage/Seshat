@@ -7,6 +7,7 @@ import prettierPlugin from "eslint-plugin-prettier/recommended";
 import prettierConfig from "eslint-config-prettier/flat";
 import perfectionist from "eslint-plugin-perfectionist";
 import { defineConfig, globalIgnores } from "eslint/config";
+import { rules } from "eslint-config-prettier";
 
 export default defineConfig([
   {
@@ -60,7 +61,6 @@ export default defineConfig([
         "error",
         {
           endOfLine: "crlf",
-          trailingComma: "es5",
         },
       ],
       "no-console": ["error", { allow: ["warn", "error"] }],

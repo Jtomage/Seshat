@@ -14,8 +14,11 @@
     "seshat-storybook"
   ],
   "peerDependencies": {
-    "@fluentui/react-components": "^9.72.3",
-    "@fluentui/react-icons": "^2.0.313",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
+    "@mui/x-tree-view": "^8.27.0",
     "@types/node": "^24.6.0",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
@@ -37,5 +40,6 @@
     "typescript-eslint": "^8.45.0",
     "vite-plugin-dts": "^4.5.4",
     "vite-tsconfig-paths": "^5.1.4"
-  }
+  },
+  "dependencies": {}
 }

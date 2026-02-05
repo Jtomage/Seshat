@@ -1,29 +1,22 @@
 import type { Decorator, Preview, ReactRenderer } from "@storybook/react-vite";
-import {
-  FluentProvider,
-  webDarkTheme,
-  webLightTheme,
-  type Theme,
-  makeStaticStyles,
-  tokens,
-} from "@fluentui/react-components";
-import { FC } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const preview: Preview = {
   globalTypes: {
     theme: {
       name: "Theme",
       description: "Global Theme",
-      defaultValue: webLightTheme,
+      defaultValue: "dark",
       toolbar: {
         icon: "paintbrush",
         items: [
           {
-            value: webLightTheme,
+            value: "light",
             title: "Light",
           },
           {
-            value: webDarkTheme,
+            value: "dark",
             title: "Dark",
           },
         ],
@@ -44,12 +37,17 @@ const preview: Preview = {
   tags: ["autodocs"],
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme;
-      document.body.style.backgroundColor = theme.colorNeutralBackground1;
+      const theme = createTheme({
+        palette: {
+          mode: context.globals.theme,
+        },
+      });
+
       return (
-        <FluentProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
           <Story />
-        </FluentProvider>
+        </ThemeProvider>
       );
     },
   ],

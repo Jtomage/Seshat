@@ -1,46 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { SearchBox } from "@seshat/components";
+import { action } from "storybook/actions";
 
 const meta = {
   argTypes: {
-    appearance: {
-      control: { type: "select" },
-
-      options: [
-        "outline",
-
-        "underline",
-
-        "filled-darker",
-
-        "filled-lighter",
-
-        "filled-darker-shadow",
-
-        "filled-lighter-shadow",
-      ],
-    },
-
-    orientation: {
-      control: { type: "select" },
-
-      options: ["vertical", "horizontal"],
-    },
-
     size: {
       control: { type: "select" },
-
       options: ["small", "medium", "large"],
     },
+    variant: {
+      control: { type: "select" },
+      options: ["filled", "outlined", "standard"],
+    },
   },
-
   component: SearchBox,
-
   render: (args) => <SearchBox {...args} />,
-
   tags: ["autodocs"],
-
   title: "Components/SearchBox",
 } satisfies Meta<typeof SearchBox>;
 
@@ -50,20 +26,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    appearance: "underline",
-
-    fieldName: "Search",
-
-    hint: "this is a hint",
-
-    onChange: (e) => {
-      console.log(e);
+    label: "Search",
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+      action("onChange")(e);
     },
-
-    orientation: "horizontal",
-
     placeholder: "",
-
     size: "medium",
+    variant: "standard",
   },
 };

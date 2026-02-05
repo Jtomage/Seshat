@@ -25,8 +25,11 @@
     "watch": "vite build --watch"
   },
   "peerDependencies": {
-    "@fluentui/react-components": "^9.72.3",
-    "@fluentui/react-icons": "^2.0.313",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
+    "@mui/x-tree-view": "^8.27.0",
     "@types/node": "^24.6.0",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",

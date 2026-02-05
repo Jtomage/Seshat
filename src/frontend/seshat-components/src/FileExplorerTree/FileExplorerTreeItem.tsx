@@ -1,56 +1,58 @@
-import {
-  FlatTreeItem,
-  TreeItemLayout,
-  type TreeItemOpenChangeData,
-  type TreeItemOpenChangeEvent,
-} from "@fluentui/react-components";
-import { type FC, useState } from "react";
+// import {
+//   FlatTreeItem,
+//   TreeItemLayout,
+//   type TreeItemOpenChangeData,
+//   type TreeItemOpenChangeEvent,
+// } from "@fluentui/react-components";
+// import { type FC, use, useState } from "react";
 
-import type { FileTreeItem } from "./FileExplorerTree.types";
+// import type { FileTreeItem } from "./FileExplorerTree.types";
 
-export type FileExplorerTreeItemProps = FileTreeItem & {
-  level: number;
-  numSibilings: number;
-  position: number;
-};
+// import { FileExplorerContext } from "../FileExplorerProvider";
 
-export const FlieExplorerTreeItem: FC<FileExplorerTreeItemProps> = ({
-  fullPath,
-  isDirectory,
-  itemName,
-  level,
-  numSibilings,
-  position,
-}: FileExplorerTreeItemProps) => {
-  const [open, setOpen] = useState(false);
+// export type FileExplorerTreeItemProps = FileTreeItem & {
+//   level: number;
+//   numSibilings: number;
+//   position: number;
+// };
 
-  const parentValue = () => {
-    const i = fullPath.lastIndexOf(itemName);
-    console.log("parentValue", i);
-    return fullPath.slice(0, i - 1);
-  };
+// export const FlieExplorerTreeItem: FC<FileExplorerTreeItemProps> = ({
+//   fullPath,
+//   isDirectory,
+//   itemName,
+//   level,
+//   numSibilings,
+//   position,
+// }: FileExplorerTreeItemProps) => {
+//   const fileExplorerContext = use(FileExplorerContext);
+//   fileExplorerContext.const[(open, setOpen)] = useState(false);
 
-  const openChangeHandler = (
-    _: TreeItemOpenChangeEvent,
-    data: TreeItemOpenChangeData
-  ) => {
-    setOpen(data.open);
-  };
+//   const parentValue = () => {
+//     const i = fullPath.lastIndexOf(itemName);
+//     return fullPath.slice(0, i - 1);
+//   };
 
-  return (
-    <>
-      <FlatTreeItem
-        aria-level={level}
-        aria-posinset={position}
-        aria-setsize={numSibilings}
-        itemType="branch"
-        onOpenChange={openChangeHandler}
-        open={open}
-        parentValue={parentValue()}
-        value={fullPath}
-      >
-        <TreeItemLayout>{itemName}</TreeItemLayout>
-      </FlatTreeItem>
-    </>
-  );
-};
+//   const openChangeHandler = (
+//     _: TreeItemOpenChangeEvent,
+//     data: TreeItemOpenChangeData
+//   ) => {
+//     setOpen(data.open);
+//   };
+
+//   return (
+//     <>
+//       <FlatTreeItem
+//         aria-level={level}
+//         aria-posinset={position}
+//         aria-setsize={numSibilings}
+//         itemType="branch"
+//         onOpenChange={openChangeHandler}
+//         open={open}
+//         parentValue={parentValue()}
+//         value={fullPath}
+//       >
+//         <TreeItemLayout>{itemName}</TreeItemLayout>
+//       </FlatTreeItem>
+//     </>
+//   );
+// };

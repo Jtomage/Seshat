@@ -1,4 +1,4 @@
-export abstract class AFileExplorerSerice {
+export abstract class AFileExplorerService {
   // get the directories
   abstract getDirectories(path: string): string[];
 

@@ -1,7 +1,7 @@
-import { AFileExplorerSerice } from "./AFileExplorerService";
+import { AFileExplorerService } from "./AFileExplorerService";
 
 // An empty version of AFileExplorerService
-export class FileExplorerServiceEmpty extends AFileExplorerSerice {
+export class FileExplorerServiceEmpty extends AFileExplorerService {
   getDirectories(_path: string): string[] {
     throw new Error("Get Directories Not implemented");
   }
