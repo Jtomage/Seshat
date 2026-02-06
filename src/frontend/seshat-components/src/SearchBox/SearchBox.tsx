@@ -1,6 +1,7 @@
 import type { FC } from "react";
 
-import { TextField, type TextFieldProps } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
 
 export type SearchBoxProps = Omit<
   TextFieldProps,
@@ -17,6 +18,21 @@ export type SearchBoxProps = Omit<
   | "type"
 >;
 
-export const SearchBox: FC<SearchBoxProps> = ({ ...rest }: SearchBoxProps) => {
-  return <TextField fullWidth type="search" {...rest} />;
+export const SearchBox: FC<SearchBoxProps> = (props: SearchBoxProps) => {
+  return (
+    <TextField
+      fullWidth
+      type="search"
+      {...props}
+      slotProps={{
+        input: {
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        },
+      }}
+    />
+  );
 };
