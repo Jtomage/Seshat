@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SearchBox } from "@seshat/components";
 import { action } from "storybook/actions";
 
-const meta = {
+const meta: Meta<typeof SearchBox> = {
   argTypes: {
     size: {
       control: { type: "select" },

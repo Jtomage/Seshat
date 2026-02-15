@@ -1,28 +1,13 @@
-import type { Decorator, Preview, ReactRenderer } from "@storybook/react-vite";
+import type { Preview, ReactRenderer } from "@storybook/react-vite";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { withThemeFromJSXProvider } from "@storybook/addon-themes";
+import type {} from "@mui/x-tree-view/themeAugmentation";
+
+const lightTheme = createTheme({ palette: { mode: "light" } });
+const darkTheme = createTheme({ palette: { mode: "dark" } });
 
 const preview: Preview = {
-  globalTypes: {
-    theme: {
-      name: "Theme",
-      description: "Global Theme",
-      defaultValue: "dark",
-      toolbar: {
-        icon: "paintbrush",
-        items: [
-          {
-            value: "light",
-            title: "Light",
-          },
-          {
-            value: "dark",
-            title: "Dark",
-          },
-        ],
-      },
-    },
-  },
   parameters: {
     controls: {
       matchers: {
@@ -30,26 +15,18 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    backgrounds: {
-      disable: true,
-    },
   },
   tags: ["autodocs"],
   decorators: [
-    (Story, context) => {
-      const theme = createTheme({
-        palette: {
-          mode: context.globals.theme,
-        },
-      });
-
-      return (
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Story />
-        </ThemeProvider>
-      );
-    },
+    withThemeFromJSXProvider<ReactRenderer>({
+      themes: {
+        light: lightTheme,
+        dark: darkTheme,
+      },
+      defaultTheme: "dark",
+      Provider: ThemeProvider,
+      GlobalStyles: CssBaseline,
+    }),
   ],
 };
 

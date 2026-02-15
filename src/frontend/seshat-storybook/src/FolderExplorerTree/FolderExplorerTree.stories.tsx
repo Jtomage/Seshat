@@ -1,10 +1,19 @@
-import type { TreeViewDefaultItemModelProperties } from "@mui/x-tree-view";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { faker } from "@faker-js/faker";
-import { FolderExplorerTree } from "@seshat/components";
+import {
+  FolderExplorerTree,
+  SystemItemFragment,
+  SystemItemNode,
+  SystemItemTree,
+} from "@seshat/components";
+import { useState } from "react";
 
-const meta = {
+import {
+  createRandomChildrenItemFragment,
+  createSystemItemTree,
+} from "../mock/mockSystemFileData";
+
+const meta: Meta<typeof FolderExplorerTree> = {
   component: FolderExplorerTree,
   render: (args) => <FolderExplorerTree {...args} />,
   tags: ["autodocs"],
@@ -15,32 +24,54 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const createTreeViewItem = (): TreeViewDefaultItemModelProperties => {
-  const item: TreeViewDefaultItemModelProperties = {
-    id: faker.string.uuid(),
-    label: `${faker.person.firstName()} ${faker.person.lastName()}`,
-  };
-  return item;
-};
-
-const generateInitialData = (): TreeViewDefaultItemModelProperties[] => {
-  const items: TreeViewDefaultItemModelProperties[] = [];
-
-  for (let i: number = 0; i < 10; i++) {
-    const parent = createTreeViewItem();
-    parent.children = [];
-    for (let j: number = 0; j < 4; j++) {
-      parent.children.push(createTreeViewItem());
-    }
-
-    items.push(parent);
-  }
-
-  return items;
-};
-
 export const Default: Story = {
   args: {
-    items: generateInitialData(),
+    tree: createSystemItemTree(5),
+  },
+};
+
+export const LazyTree: Story = {
+  args: {
+    tree: createSystemItemTree(5),
+  },
+  render: ({ tree: initialTree, ...rest }) => {
+    const [tree, setTree] = useState<SystemItemTree>(initialTree);
+
+    const handleItemExpansion = (
+      _event: null | React.SyntheticEvent,
+      itemId: string,
+      isExpanded: boolean
+    ) => {
+      // must have children or will not allowe it expand, will need to load grand children
+      // only fetch if exapanding and not already loaded
+      if (!isExpanded) return;
+
+      // get expanded directory item
+      const expandedItem = tree.find(itemId);
+      // the item and children should have already been defined
+      if (!expandedItem || !expandedItem.children) return;
+
+      // check if has grand children
+      let newTree: SystemItemTree = tree;
+      for (const child of expandedItem.children) {
+        // if it is a file or has children skip
+        if (!child.isDirectory || child.children) continue;
+        // if no grand children add grand children
+        const grandKids: SystemItemFragment[] =
+          createRandomChildrenItemFragment(8);
+        // add grandkids to tree
+        newTree = newTree.addChildren(child.id, grandKids);
+      }
+      //update to new tree
+      setTree(newTree);
+    };
+
+    return (
+      <FolderExplorerTree
+        {...rest}
+        onItemExpansionToggle={handleItemExpansion}
+        tree={tree}
+      ></FolderExplorerTree>
+    );
   },
 };
