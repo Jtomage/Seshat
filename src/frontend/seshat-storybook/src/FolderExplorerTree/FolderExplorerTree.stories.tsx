@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   FolderExplorerTree,
   SystemItemFragment,
-  SystemItemNode,
   SystemItemTree,
 } from "@seshat/components";
 import { useState } from "react";

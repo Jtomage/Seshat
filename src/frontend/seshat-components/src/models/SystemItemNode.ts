@@ -3,7 +3,11 @@ import type { TreeViewDefaultItemModelProperties } from "@mui/x-tree-view";
 import { InvalidPathError } from "../errors/InvalidPathError";
 import { cleanAndvalidatePath } from "./File.helpers";
 
-export class SystemItemNode implements TreeViewDefaultItemModelProperties {
+export interface SystemItemInfo extends TreeViewDefaultItemModelProperties {
+  isDirectory: boolean;
+}
+
+export class SystemItemNode implements SystemItemInfo {
   children?: SystemItemNode[];
   id: string;
   isDirectory: boolean;
