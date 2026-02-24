@@ -1,2 +1,2 @@
-export * from "./FileLIst";
+export * from "./FileList";
 export * from "./FileList.types";

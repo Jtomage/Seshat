@@ -2,32 +2,43 @@ import type { FC } from "react";
 
 import { List } from "@mui/material";
 
-import type { SelectableSystemItem } from "./FileList.types";
+import type { FileListModes, SelectableSystemItem } from "./FileList.types";
 
 import { FileListItem } from "./FileListItem";
 
 export interface FileListProps {
-  enableCheckboxes: boolean;
+  fileListMode: FileListModes;
   items: SelectableSystemItem[];
-  onChange: (id: string) => void;
+  /**
+   * on checkbox change call back
+   * @param id the id of the item of the checkbox that changed
+   * @returns
+   */
+  onCheckboxChange?: (id: string) => void;
+  /**
+   * on item clicked to handle when item / row is clicked
+   * @param id
+   * @returns
+   */
+  onItemClicked?: (id: string) => void;
 }
 
 export const FileList: FC<FileListProps> = ({
-  enableCheckboxes = false,
+  fileListMode = "readonly",
   items,
-  onChange,
+  onCheckboxChange,
+  onItemClicked,
 }) => {
   return (
     <List dense sx={{ bgcolor: `background.paper` }}>
       {items.map((item) => {
         return (
           <FileListItem
-            enableCheckbox={enableCheckboxes}
+            fileListMode={fileListMode}
             item={item}
             key={item.id}
-            onCheckboxChange={(id: string) => {
-              onChange(id);
-            }}
+            onCheckboxChange={onCheckboxChange}
+            onItemClicked={onItemClicked}
           />
         );
       })}
